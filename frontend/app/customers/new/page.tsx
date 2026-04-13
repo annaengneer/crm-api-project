@@ -1,0 +1,85 @@
+"use client";
+
+import { useState } from "react";
+import{ useRouter } from "next/navigation"
+
+
+
+export default function NewCustomerPage() {
+    const router = useRouter();
+
+    const [name, setName] = useState("");
+    const [status, setStatus] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    async function handleSubmit(e:React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setLoading(true)
+        setError("")
+    try {
+        const res = await fetch("http://127.0.0.1:8000/customers", {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                status
+            })
+        })
+        if (!res.ok) {
+            throw new Error("顧客登録に失敗しました")
+        }
+
+        router.push("/customers");
+        router.refresh();
+    } catch(err) {
+        setError("登録できませんでした");
+        console.error(err)
+    }finally {
+        setLoading(false)
+    }
+}
+return (
+    <main className="p-6 max-w-xl mx-auto">
+    <h1 className="text-2xl font-bold mb-6">顧客登録</h1>
+
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label className="block mb-1 font-medium">名前</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border rounded-lg px-3 py-2"
+          placeholder="山田"
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium">ステータス</label>
+        <input
+          type="text"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-full border rounded-lg px-3 py-2"
+          placeholder="lead"
+          required
+        />
+      </div>
+
+      {error && <p className="text-red-500">{error}</p>}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="border rounded-lg px-4 py-2"
+      >
+        {loading ? "登録中..." : "登録する"}
+      </button>
+    </form>
+  </main>
+)
+}
