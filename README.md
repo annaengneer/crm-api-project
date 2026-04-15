@@ -3,7 +3,7 @@
 FastAPI・PostgreSQL・Next.js を使って作成したCRMアプリです。  
 顧客情報の管理と、顧客ごとの商談管理ができます。
 
----
+
 
 ## 使用技術
 
@@ -19,7 +19,7 @@ FastAPI・PostgreSQL・Next.js を使って作成したCRMアプリです。
 ### データベース
 - PostgreSQL（Docker）
 
----
+
 
 ## 主な機能
 
@@ -34,7 +34,7 @@ FastAPI・PostgreSQL・Next.js を使って作成したCRMアプリです。
 - 商談登録
 - 顧客ごとの商談一覧表示
 
----
+
 
 ## 画面構成
 
@@ -50,7 +50,7 @@ FastAPI・PostgreSQL・Next.js を使って作成したCRMアプリです。
 - `/customers/[id]/new-deal`  
   商談登録ページ
 
----
+
 
 ## 起動方法
 
@@ -63,7 +63,7 @@ git clone リポジトリURL
 cd crm-api-project
 ```
 
----
+
 
 ### 2. DockerでDBを起動
 
@@ -77,7 +77,7 @@ docker compose up -d
 docker ps
 ```
 
----
+
 
 ### 3. バックエンド起動（FastAPI）
 
@@ -114,7 +114,7 @@ uvicorn main:app --reload
 - API: http://127.0.0.1:8000  
 - Swagger: http://127.0.0.1:8000/docs  
 
----
+
 
 ### 4. フロントエンド起動（Next.js）
 
@@ -130,7 +130,7 @@ npm run dev
 
 - http://localhost:3000
 
----
+
 
 ### 5. 停止方法
 
